@@ -1,0 +1,29 @@
+<h1 id="module-11-assignment">Module 11 Assignment</h1>
+<p>&quot;The code below contains a 'deliberate' bug! Find the bug and fix it.</p>
+<p>Report on your blog the success or failure in your debugging procedure.&quot;</p>
+<p>Original code:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#tukey_multiple &lt;- function(x) {</span>
+<span class="co">#   outliers &lt;- array(TRUE,dim=dim(x))</span>
+<span class="co">#   for (j in 1:ncol(x))</span>
+<span class="co">#    {</span>
+<span class="co">#    outliers[,j] &lt;- outliers[,j] &amp;&amp; tukey.outlier(x[,j])</span>
+<span class="co">#    }</span>
+<span class="co">#outlier.vec &lt;- vector(length=nrow(x))</span>
+<span class="co">#    for (i in 1:nrow(x))</span>
+<span class="co">#    { outlier.vec[i] &lt;- all(outliers[i,]) } return(outlier.vec) }</span></code></pre>
+<p>Fixed code:</p>
+<pre class="sourceCode r"><code class="sourceCode r">tukey_multiple &lt;-<span class="st"> </span>function(x) {
+   outliers &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">TRUE</span>,<span class="dt">dim=</span><span class="kw">dim</span>(x))
+   for (j in <span class="dv">1</span>:<span class="kw">ncol</span>(x))
+    {
+    outliers[,j] &lt;-<span class="st"> </span>outliers[,j] &amp;&amp;<span class="st"> </span><span class="kw">tukey.outliers</span>(x[,j])
+    }
+outlier.vec &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length=</span><span class="kw">nrow</span>(x))
+    for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(x))
+    { 
+      outlier.vec[i] &lt;-<span class="st"> </span><span class="kw">all</span>(outliers[i,]) 
+      } 
+<span class="kw">return</span>(outlier.vec) 
+}</code></pre>
+<p>I believe what was wrong with this code was the formatting. Once I properly indented and separated each line/section of the function it ran without a problem. It looks like the function is now supposed to detect outliers in an array/vector properly.</p>
+<p>Once I try to run the function in my own vector, however, I receive an error detailing &quot;could not find function &quot;tukey.outliers&quot;&quot;. I assume this is because tukey.outliers is a separate function that is not defined nor provided here but if that function were to be provided I am sure this code would run correctly.</p>
